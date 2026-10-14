@@ -14,6 +14,7 @@ class UserCreate(BaseModel):
     headline: Optional[str] = None
     availability_hours: int = 10
     collaboration_mode: str = "Remote"
+    skills: Optional[List[str]] = None
 
 class UserUpdate(BaseModel):
     name: Optional[str] = None

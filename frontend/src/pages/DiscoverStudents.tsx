@@ -5,9 +5,10 @@ import { MatchExplanationModal } from '../components/MatchExplanationModal';
 
 interface DiscoverStudentsProps {
   currentUser: User | null;
+  onOpenChatWithPeer?: (peer: { user_id: string; name: string; college_short_name?: string }) => void;
 }
 
-export const DiscoverStudents: React.FC<DiscoverStudentsProps> = ({ currentUser }) => {
+export const DiscoverStudents: React.FC<DiscoverStudentsProps> = ({ currentUser, onOpenChatWithPeer }) => {
   const [students, setStudents] = useState<User[]>([]);
   const [colleges, setColleges] = useState<any[]>([]);
   const [skills, setSkills] = useState<any[]>([]);
@@ -91,6 +92,20 @@ export const DiscoverStudents: React.FC<DiscoverStudentsProps> = ({ currentUser 
 
   return (
     <div className="space-y-6">
+      {/* Peer Discovery Ribbon */}
+      <div className="p-3 rounded-xl bg-slate-900 text-white dark:bg-slate-950 dark:border dark:border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+        <div className="flex items-center space-x-2">
+          <span className="w-2 h-2 rounded-full bg-teal-400"></span>
+          <span className="font-bold tracking-wider">[TALENT_RADAR // VERIFIED_BUILDERS]</span>
+          <span className="text-slate-400 hidden sm:inline">&bull; Rule-Based Complementary Pairing</span>
+        </div>
+        <div className="flex items-center space-x-4 text-[11px] text-slate-300 dark:text-slate-400">
+          <span>CAMPUSES: <strong className="text-white">28+ CONNECTED</strong></span>
+          <span>ACCURACY: <strong className="text-white">94.2%</strong></span>
+          <span>PROTOCOL: <strong className="text-white">SRS &sect;4.4</strong></span>
+        </div>
+      </div>
+
       {/* Header */}
       <div>
         <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">Discover Collaborators</h1>
@@ -261,12 +276,24 @@ export const DiscoverStudents: React.FC<DiscoverStudentsProps> = ({ currentUser 
                   {student.collaboration_mode} • ~{student.availability_hours}h/wk
                 </span>
 
-                <button
-                  onClick={() => setSelectedPeer(student)}
-                  className="px-3.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200 text-xs font-mono font-bold transition"
-                >
-                  Connect
-                </button>
+                <div className="flex items-center space-x-1.5">
+                  <button
+                    onClick={() => onOpenChatWithPeer?.({
+                      user_id: student.user_id,
+                      name: student.name,
+                      college_short_name: student.college_short_name || student.college_name
+                    })}
+                    className="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 transition"
+                  >
+                    💬 Chat
+                  </button>
+                  <button
+                    onClick={() => setSelectedPeer(student)}
+                    className="px-3.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200 text-xs font-mono font-bold transition"
+                  >
+                    Connect
+                  </button>
+                </div>
               </div>
             </div>
           ))}

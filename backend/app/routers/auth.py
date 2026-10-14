@@ -33,7 +33,24 @@ def register(user_data: UserCreate):
             user_id, user_data.name, user_data.email, pwd_hash, user_data.college_id,
             user_data.bio, user_data.headline, user_data.availability_hours, user_data.collaboration_mode
         ))
-        return {"status": "success", "user_id": user_id, "token": user_id}
+
+        if user_data.skills:
+            for s_name in user_data.skills:
+                if not s_name.strip(): continue
+                cursor.execute("SELECT skill_id FROM skills WHERE LOWER(name) = LOWER(?)", (s_name.strip(),))
+                s_row = cursor.fetchone()
+                sid = s_row["skill_id"] if s_row else f"sk_{uuid.uuid4().hex[:6]}"
+                if not s_row:
+                    cursor.execute("INSERT INTO skills (skill_id, name, category) VALUES (?, ?, 'Technical')", (sid, s_name.strip()))
+                cursor.execute("INSERT OR REPLACE INTO user_skills (user_id, skill_id, proficiency, can_contribute, wants_to_learn) VALUES (?, ?, 'Intermediate', 1, 0)", (user_id, sid))
+
+        cursor.execute("""
+            SELECT u.*, c.name as college_name, c.short_name as college_short_name
+            FROM users u LEFT JOIN colleges c ON u.college_id = c.college_id
+            WHERE u.user_id = ?
+        """, (user_id,))
+        created_user = dict(cursor.fetchone())
+        return {"status": "success", "user_id": user_id, "token": user_id, "user": created_user}
 
 @router.post("/login")
 def login(login_data: UserLogin):

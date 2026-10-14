@@ -20,6 +20,20 @@ export const ShowcasePage: React.FC = () => {
 
   return (
     <div className="space-y-6">
+      {/* Shipped Telemetry Banner */}
+      <div className="p-3 rounded-xl bg-slate-900 text-white dark:bg-slate-950 dark:border dark:border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+        <div className="flex items-center space-x-2">
+          <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span className="font-bold tracking-wider">[TELEMETRY_LOGS // SHIPPED_BUILDS]</span>
+          <span className="text-slate-400 hidden sm:inline">&bull; Verifiable Student Artifacts</span>
+        </div>
+        <div className="flex items-center space-x-4 text-[11px] text-slate-300 dark:text-slate-400">
+          <span>BENCHMARKS: <strong className="text-white">VERIFIED</strong></span>
+          <span>REPOSITORIES: <strong className="text-white">OPEN SOURCE</strong></span>
+          <span>CITATIONS: <strong className="text-white">FR-029</strong></span>
+        </div>
+      </div>
+
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">Project Showcase</h1>

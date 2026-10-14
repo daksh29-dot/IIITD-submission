@@ -1,9 +1,9 @@
-# CampusConnect
+# GroundUp
 
 > **A Student-First Cross-College Collaboration and Project-Building Platform**  
 > *HackShift — 24-Hour Hackathon Submission • Software Requirements Specification (SRS) v0.2 Compliant*
 
-CampusConnect is a unified platform enabling students to discover like-minded peers across college boundaries, form balanced hackathon and project teams based on complementary skills, share knowledge, and turn ideas into tangible, shipped outcomes.
+GroundUp is a developer-first platform enabling students to discover like-minded peers across college boundaries, form balanced hackathon and project teams based on complementary skills, share knowledge, and turn ideas into tangible, shipped outcomes.
 
 ---
 

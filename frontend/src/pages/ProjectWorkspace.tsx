@@ -34,6 +34,11 @@ export const ProjectWorkspace: React.FC<ProjectWorkspaceProps> = ({ projectId, c
   const [demoPeers, setDemoPeers] = useState<User[]>([]);
   const [inviteSuccess, setInviteSuccess] = useState<string | null>(null);
 
+  // Discussion & briefs state
+  const [projectMessages, setProjectMessages] = useState<any[]>([]);
+  const [newProjectBrief, setNewProjectBrief] = useState('');
+  const [sendingBrief, setSendingBrief] = useState(false);
+
   const loadProject = async () => {
     setLoading(true);
     try {
@@ -46,10 +51,35 @@ export const ProjectWorkspace: React.FC<ProjectWorkspaceProps> = ({ projectId, c
     }
   };
 
+  const loadProjectMessages = async () => {
+    try {
+      const msgs = await api.getProjectMessages(projectId);
+      setProjectMessages(msgs || []);
+    } catch {
+      // fallback
+    }
+  };
+
   useEffect(() => {
     loadProject();
+    loadProjectMessages();
     api.getDemoUsers().then(setDemoPeers).catch(() => {});
   }, [projectId]);
+
+  const handlePostBrief = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newProjectBrief.trim()) return;
+    setSendingBrief(true);
+    try {
+      await api.sendProjectMessage(projectId, newProjectBrief.trim());
+      setNewProjectBrief('');
+      loadProjectMessages();
+    } catch (err) {
+      alert('Failed to post brief');
+    } finally {
+      setSendingBrief(false);
+    }
+  };
 
   const handleCreateTask = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -188,6 +218,19 @@ export const ProjectWorkspace: React.FC<ProjectWorkspaceProps> = ({ projectId, c
           ✓ {inviteSuccess}
         </div>
       )}
+
+      {/* Workspace Terminal Ribbon */}
+      <div className="p-3 rounded-xl bg-slate-900 text-white dark:bg-slate-950 dark:border dark:border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+        <div className="flex items-center space-x-2">
+          <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse"></span>
+          <span className="font-bold tracking-wider">[WORKSPACE_TERMINAL // {project.title.toUpperCase()}]</span>
+        </div>
+        <div className="flex items-center space-x-4 text-[11px] text-slate-300 dark:text-slate-400">
+          <span>STAGE: <strong className="text-white">{project.project_stage.toUpperCase()}</strong></span>
+          <span>SPRINT: <strong className="text-white">{project.status.toUpperCase()}</strong></span>
+          <span>KANBAN: <strong className="text-white">{(project.tasks?.length || 0)} TASKS</strong></span>
+        </div>
+      </div>
 
       {/* Workspace Banner */}
       <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 pixel-box space-y-4">
@@ -405,6 +448,68 @@ export const ProjectWorkspace: React.FC<ProjectWorkspaceProps> = ({ projectId, c
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Team Discussion & Project Briefs Space (AWS Builder Center Spec) */}
+      <div className="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 pixel-box space-y-4">
+        <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
+          <div>
+            <h3 className="text-xs font-mono font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider">
+              Team Discussion & Project Briefs
+            </h3>
+            <p className="text-[11px] text-slate-500 font-mono">
+              Live asynchronous communication space for all project contributors
+            </p>
+          </div>
+          <span className="pixel-chip bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+            {projectMessages.length} Messages
+          </span>
+        </div>
+
+        {/* Message Stream */}
+        <div className="max-h-60 overflow-y-auto space-y-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-950/40">
+          {projectMessages.length === 0 ? (
+            <div className="text-center py-6 text-xs font-mono text-slate-400">
+              No briefs posted yet. Share a technical update or question with your team below.
+            </div>
+          ) : (
+            projectMessages.map((msg, idx) => (
+              <div key={msg.message_id || idx} className="p-2.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 text-xs space-y-1">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-1.5">
+                    <span className="font-bold text-slate-900 dark:text-slate-100">{msg.sender_name}</span>
+                    {msg.college_short_name && (
+                      <span className="text-[10px] font-mono text-slate-500">({msg.college_short_name})</span>
+                    )}
+                  </div>
+                  <span className="text-[9px] font-mono text-slate-400">
+                    {new Date(msg.created_at || Date.now()).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  </span>
+                </div>
+                <p className="text-slate-700 dark:text-slate-300 leading-relaxed font-sans">{msg.content}</p>
+              </div>
+            ))
+          )}
+        </div>
+
+        {/* Post Brief Form */}
+        <form onSubmit={handlePostBrief} className="flex gap-2">
+          <input
+            type="text"
+            required
+            value={newProjectBrief}
+            onChange={e => setNewProjectBrief(e.target.value)}
+            placeholder="Post a project update, architecture note, or meeting brief..."
+            className="flex-1 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 p-2.5 focus:outline-none"
+          />
+          <button
+            type="submit"
+            disabled={sendingBrief || !newProjectBrief.trim()}
+            className="px-4 py-2 rounded-xl bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 text-xs font-mono font-bold hover:bg-slate-800 dark:hover:bg-slate-200 transition disabled:opacity-50 shrink-0"
+          >
+            POST BRIEF &rarr;
+          </button>
+        </form>
       </div>
 
       {/* Milestones & Resources Grid */}

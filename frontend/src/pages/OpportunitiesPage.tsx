@@ -102,6 +102,20 @@ export const OpportunitiesPage: React.FC<OpportunitiesPageProps> = ({ onNavigate
 
   return (
     <div className="space-y-6">
+      {/* Sprint Radar Telemetry Banner */}
+      <div className="p-3 rounded-xl bg-slate-900 text-white dark:bg-slate-950 dark:border dark:border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+        <div className="flex items-center space-x-2">
+          <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+          <span className="font-bold tracking-wider">[EVENT_RADAR // SPRINT_CALENDAR]</span>
+          <span className="text-slate-400 hidden sm:inline">&bull; Hackathons &amp; Design Sprints</span>
+        </div>
+        <div className="flex items-center space-x-4 text-[11px] text-slate-300 dark:text-slate-400">
+          <span>UPCOMING: <strong className="text-white">HACKSHIFT 2026</strong></span>
+          <span>REGISTRATION: <strong className="text-white">OPEN</strong></span>
+          <span>ELIGIBILITY: <strong className="text-white">CROSS-COLLEGE</strong></span>
+        </div>
+      </div>
+
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">Opportunity Hub</h1>

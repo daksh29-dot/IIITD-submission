@@ -292,5 +292,52 @@ export const api = {
       headers: getHeaders()
     });
     return res.json();
+  },
+
+  // Registration & Direct Messaging
+  async register(data: any) {
+    const res = await fetch(`${API_BASE}/auth/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.detail || 'Registration failed');
+    }
+    return res.json();
+  },
+
+  async sendDirectMessage(recipient_id: string, content: string) {
+    const res = await fetch(`${API_BASE}/messages/direct`, {
+      method: 'POST',
+      headers: getHeaders(),
+      body: JSON.stringify({ recipient_id, content })
+    });
+    return res.json();
+  },
+
+  async getDirectMessages(other_user_id: string) {
+    const res = await fetch(`${API_BASE}/messages/direct/${other_user_id}`, { headers: getHeaders() });
+    return res.json();
+  },
+
+  async sendProjectMessage(project_id: string, content: string) {
+    const res = await fetch(`${API_BASE}/messages/project/${project_id}`, {
+      method: 'POST',
+      headers: getHeaders(),
+      body: JSON.stringify({ content })
+    });
+    return res.json();
+  },
+
+  async getProjectMessages(project_id: string) {
+    const res = await fetch(`${API_BASE}/messages/project/${project_id}`);
+    return res.json();
+  },
+
+  async getConversations() {
+    const res = await fetch(`${API_BASE}/messages/conversations`, { headers: getHeaders() });
+    return res.json();
   }
 };

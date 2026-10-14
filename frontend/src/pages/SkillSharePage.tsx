@@ -99,9 +99,23 @@ export const SkillSharePage: React.FC<SkillSharePageProps> = ({ currentUser }) =
 
   return (
     <div className="space-y-6">
+      {/* Reciprocal Protocol Syntax Banner */}
+      <div className="p-3.5 rounded-xl bg-slate-900 text-white dark:bg-slate-950 dark:border dark:border-slate-800 font-mono text-xs space-y-2">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 dark:border-slate-800/80 pb-2">
+          <div className="flex items-center space-x-2">
+            <span className="w-2 h-2 rounded-full bg-teal-400"></span>
+            <span className="font-bold tracking-wider">[PROTOCOL: RECIPROCAL_PEER_EXCHANGE // SRS &sect;4.5]</span>
+          </div>
+          <span className="text-[11px] text-slate-400">ZERO_FEE &bull; BILATERAL_MATCHING</span>
+        </div>
+        <div className="text-[11px] text-slate-300 dark:text-slate-400 leading-relaxed overflow-x-auto">
+          <code>def reciprocal_match(builder_a, builder_b): return (builder_a.offers in builder_b.learns) and (builder_b.offers in builder_a.learns)</code>
+        </div>
+      </div>
+
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">SkillShare</h1>
+          <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">SkillShare Exchange</h1>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
             Section 4.5: Reciprocal knowledge exchange across campuses. Peer mentoring and co-learning.
           </p>

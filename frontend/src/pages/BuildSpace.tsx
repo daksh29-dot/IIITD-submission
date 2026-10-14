@@ -94,24 +94,38 @@ export const BuildSpace: React.FC<BuildSpaceProps> = ({ currentUser, onNavigate 
 
   return (
     <div className="space-y-6">
+      {/* Blueprint Subheader Ribbon */}
+      <div className="p-3 rounded-xl bg-slate-900 text-white dark:bg-slate-950 dark:border dark:border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+        <div className="flex items-center space-x-2">
+          <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse"></span>
+          <span className="font-bold tracking-wider">[BUILDSPACE // PROJECT_BLUEPRINTS]</span>
+          <span className="text-slate-400 hidden sm:inline">&bull; Cross-College Team Formation</span>
+        </div>
+        <div className="flex items-center space-x-4 text-[11px] text-slate-300 dark:text-slate-400">
+          <span>REPOSITORIES: <strong className="text-white">14 ACTIVE</strong></span>
+          <span>ROLES: <strong className="text-white">26 OPEN</strong></span>
+          <span>PROTOCOL: <strong className="text-white">SRS &sect;4.3</strong></span>
+        </div>
+      </div>
+
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">BuildSpace</h1>
+          <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">BuildSpace Blueprints</h1>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-            Section 4.3: Turn collaborative ideas into shipped products. Recruit teammates by required skills.
+            Section 4.3: Turn collaborative ideas into shipped products. Define required skills and recruit cross-campus co-builders.
           </p>
         </div>
-        <div className="flex gap-2 self-start">
+        <div className="flex gap-2 self-start font-mono">
           <button
             onClick={() => onNavigate('myprojects')}
-            className="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-mono font-semibold transition"
+            className="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold transition"
           >
             My Projects
           </button>
           <button
             onClick={() => setShowCreateModal(true)}
-            className="inline-flex items-center space-x-1.5 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200 text-xs font-mono font-bold pixel-box transition"
+            className="inline-flex items-center space-x-1.5 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200 text-xs font-bold pixel-box transition"
           >
             <span>+ PUBLISH BUILD</span>
           </button>

@@ -64,6 +64,20 @@ export const CommunitiesPage: React.FC = () => {
 
   return (
     <div className="space-y-6">
+      {/* Collegiate Federation Banner */}
+      <div className="p-3 rounded-xl bg-slate-900 text-white dark:bg-slate-950 dark:border dark:border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+        <div className="flex items-center space-x-2">
+          <span className="w-2 h-2 rounded-full bg-blue-400"></span>
+          <span className="font-bold tracking-wider">[FEDERATION // INTER-COLLEGE_SOCIETIES]</span>
+          <span className="text-slate-400 hidden sm:inline">&bull; Cross-Campus Alliance Network</span>
+        </div>
+        <div className="flex items-center space-x-4 text-[11px] text-slate-300 dark:text-slate-400">
+          <span>CHAPTERS: <strong className="text-white">6 VERIFIED</strong></span>
+          <span>ALLIANCES: <strong className="text-white">SRS &sect;4.6</strong></span>
+          <span>INITIATIVES: <strong className="text-white">JOINT HOSTING</strong></span>
+        </div>
+      </div>
+
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">Campus Network & Societies</h1>

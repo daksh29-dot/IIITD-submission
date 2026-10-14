@@ -209,3 +209,13 @@ export interface NotificationItem {
   read_status: boolean;
   created_at: string;
 }
+
+export interface College {
+  college_id: string;
+  name: string;
+  short_name: string;
+  location: string;
+  website?: string;
+}
+
+export type ProjectMatch = Project;

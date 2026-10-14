@@ -113,6 +113,20 @@ export const StudentProfile: React.FC<StudentProfileProps> = ({ currentUser, onP
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
+      {/* Identity Terminal Ribbon */}
+      <div className="p-3 rounded-xl bg-slate-900 text-white dark:bg-slate-950 dark:border dark:border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+        <div className="flex items-center space-x-2">
+          <span className="w-2 h-2 rounded-full bg-teal-400"></span>
+          <span className="font-bold tracking-wider">[IDENTITY_SPEC // BUILDER_PASSPORT]</span>
+          <span className="text-slate-400 hidden sm:inline">&bull; SRS &sect;4.1</span>
+        </div>
+        <div className="flex items-center space-x-4 text-[11px] text-slate-300 dark:text-slate-400">
+          <span>AFFILIATION: <strong className="text-white">{profile?.verification_status?.toUpperCase() || 'VERIFIED'}</strong></span>
+          <span>COMMITMENT: <strong className="text-white">{profile?.availability_hours || 10} HRS/WK</strong></span>
+          <span>MODE: <strong className="text-white">{profile?.collaboration_mode?.toUpperCase() || 'REMOTE'}</strong></span>
+        </div>
+      </div>
+
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">My Profile & Portfolio</h1>

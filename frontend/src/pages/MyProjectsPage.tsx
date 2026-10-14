@@ -58,6 +58,20 @@ export const MyProjectsPage: React.FC<MyProjectsPageProps> = ({ currentUser, onN
 
   return (
     <div className="space-y-6">
+      {/* Portfolio Telemetry Ribbon */}
+      <div className="p-3 rounded-xl bg-slate-900 text-white dark:bg-slate-950 dark:border dark:border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+        <div className="flex items-center space-x-2">
+          <span className="w-2 h-2 rounded-full bg-teal-400"></span>
+          <span className="font-bold tracking-wider">[PORTFOLIO_DASHBOARD // INITIATIVES_AND_LEADS]</span>
+          <span className="text-slate-400 hidden sm:inline">&bull; SRS &sect;4.3 &amp; &sect;9.1</span>
+        </div>
+        <div className="flex items-center space-x-4 text-[11px] text-slate-300 dark:text-slate-400">
+          <span>LEADING: <strong className="text-white">{createdProjects.length} BUILDS</strong></span>
+          <span>CONTRIBUTING: <strong className="text-white">{joinedProjects.length} BUILDS</strong></span>
+          <span>INBOX: <strong className="text-white">{pendingRequests.length} APPLICANTS</strong></span>
+        </div>
+      </div>
+
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>

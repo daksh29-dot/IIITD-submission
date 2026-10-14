@@ -238,6 +238,20 @@ def init_db():
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (reporter_id) REFERENCES users(user_id) ON DELETE CASCADE
     );
+
+    CREATE TABLE IF NOT EXISTS messages (
+        message_id TEXT PRIMARY KEY,
+        sender_id TEXT NOT NULL,
+        recipient_id TEXT,
+        project_id TEXT,
+        club_id TEXT,
+        content TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (sender_id) REFERENCES users(user_id) ON DELETE CASCADE,
+        FOREIGN KEY (recipient_id) REFERENCES users(user_id) ON DELETE CASCADE,
+        FOREIGN KEY (project_id) REFERENCES projects(project_id) ON DELETE CASCADE,
+        FOREIGN KEY (club_id) REFERENCES clubs(club_id) ON DELETE CASCADE
+    );
     """)
 
     conn.commit()
