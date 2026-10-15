@@ -2,7 +2,7 @@
 
 &lt;div align=&quot;center&quot;&gt;
 
-
+![GroundUp Preview](backend/app/static/assets/Screenshot%202026-10-15%20133120.png)
 
 **The Student-First Cross-College Collaboration & Algorithmic Teaming Platform**  
 *HackShift 2026 Submission • Software Requirements Specification (SRS) v0.2 Compliant*
