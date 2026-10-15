@@ -1,8 +1,16 @@
 # GroundUp (CampusConnect)
 
-&lt;div align=&quot;center&quot;&gt;
 
 ![GroundUp Preview](backend/app/static/assets/Screenshot%202026-10-15%20133120.png)
+![GroundUp Preview 1](backend/app/static/assets/Screenshot%202026-10-15%20133120.png)
+
+![GroundUp Preview 2](backend/app/static/assets/Screenshot%202026-10-15%20133140.png)
+
+![GroundUp Preview 3](backend/app/static/assets/Screenshot%202026-10-15%20133153.png)
+
+![GroundUp Preview 4](backend/app/static/assets/Screenshot%202026-10-15%20133209.png)
+
+![GroundUp Preview 5](backend/app/static/assets/Screenshot%202026-10-15%20133222.png)
 
 **The Student-First Cross-College Collaboration & Algorithmic Teaming Platform**  
 *HackShift 2026 Submission • Software Requirements Specification (SRS) v0.2 Compliant*
