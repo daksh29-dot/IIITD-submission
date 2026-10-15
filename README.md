@@ -1,7 +1,6 @@
 # GroundUp (CampusConnect)
 
 
-![GroundUp Preview](backend/app/static/assets/Screenshot%202026-10-15%20133120.png)
 ![GroundUp Preview 1](backend/app/static/assets/Screenshot%202026-10-15%20133120.png)
 
 ![GroundUp Preview 2](backend/app/static/assets/Screenshot%202026-10-15%20133140.png)
